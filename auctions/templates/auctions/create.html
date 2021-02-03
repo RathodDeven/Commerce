@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{%if msg%}
+<div><h3>{{msg}}</h3></div>
+{%endif%}
+<form action="{%url 'create'%}" method="post">
+    {%csrf_token%}
+    <div>Title:<input type="text" name="title" ></div>
+    <div>Discription:<textarea name="discription"  cols="30" rows="10">Discribe Your Product in short.</textarea></div>
+    <div>Starting Bid:<input type="text" name="price" ></div>
+    <div>Image url of your Product:<input type="url" name="img_url" ></div>
+    <div>Category:             <Select name="category">
+        <option value="Fashion">Fashion</option>
+        <option value="Toys">Toys</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Home">Home</option>
+    </Select></div>
+    <div> <input type="submit" value="Create"></div>
+</form>
+{% endblock %}

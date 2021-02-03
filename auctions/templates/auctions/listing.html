@@ -1,0 +1,66 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2>Listing:{{listing.name}}</h2><br>
+{%if user.is_authenticated%}
+{%if watching%}
+<div><a href="{%url 'remove_watch' listing.id%}">Remove from Watchinglist</a></div>
+{%else%}
+<div><a href="{%url 'watch' listing.id%}">Add To watchlist</a></div>
+{%endif%}
+{%endif%}
+<img src="{{listing.img_url}}" alt="image of listing" style="margin: 10px;"><br>
+
+{%if not listing.closed%}
+
+<div><h5>{{num_bids}} so far.</h5></div>
+<div><h4>Latest bid was of {{latest_bid.current_price}} by {{latest_bid.name.username}}</h4></div>
+{%if latest_bid.name == user%}
+<div>You bided the last bid</div>
+{%endif%}
+
+{%if user.is_authenticated%}
+<form action="{%url 'bid' listing.id%}" method="post">
+    {%csrf_token%}
+    <input type="text" name="bid_amount"><br>
+    <input type="submit" value="Bid"  class="btn btn-primary">
+</form>
+
+{%if user == listing.creator%}
+<a href="{%url 'bid_close' listing.id%}">Close Bid</a>
+{%endif%}
+{%endif%}
+{%else%}
+<div><h3>{{latest_bid.name}} won the auction with a bid of {{latest_bid.current_price}}</h3></div>
+
+{%endif%}
+
+
+
+
+<h2>Details:</h2>
+<ul>
+    <li>Listed by: {{listing.creator}}</li>
+    <li>Category: {{listing.category}}</li>
+    <li>Creation date: {{listing.create_date}}</li>
+    <li>Creation time: {{listing.create_time}}</li>
+</ul>
+
+<h2>Comments: </h2>
+<ul>
+    {%for t in comments%}
+    <li>{{t.person.username}} :  <p>{{t.comment}}
+    </p></li>
+    {%empty%}
+<li>No comments.Add one.</li>
+    {%endfor%}
+    <li><form action="{%url 'comment' listing.id %}" method="POST">
+        {%csrf_token%}
+        <textarea name="comment" cols="30" rows="1">Comment something.</textarea>
+        <input type="submit" value="Comment">
+    </form></li>
+
+</ul>
+
+
+{% endblock %}

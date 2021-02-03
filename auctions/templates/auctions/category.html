@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Category: {{category}}</h2>
+    <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+    {%for item in listings%}
+    {%if item.category == category%}
+    <div class="card"  style="width: 18rem;margin: 20px;">
+        <img src="{{item.img_url}}" class="card-img-top" alt="Image was supposed to be here">
+        <div class="card-body">
+        <h4 class="card-title">{{item.name}}</h4>
+        <p class="card-text">{{item.discription}}</p>
+        <h6 class="card-title">Bid Started at:  ${{item.price}}</h6>
+        <h6 class="card-title">Created Date: {{item.create_date}}</h6>
+        <h6 class="car-title">Created Time: {{item.create_time}}</h6>
+        <a href="{%url 'listing' item.id%}" class="btn btn-primary">Details</a>
+        </div>
+    </div>
+    {%endif%}
+    {%empty%} 
+    <div>No items added.</div>
+    {%endfor%}
+    </div>
+
+{% endblock %}
