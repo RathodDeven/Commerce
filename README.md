@@ -1,7 +1,6 @@
 # Commerce
 
-Its an auction platform where any user can create an listing for an item , then other user could bid on that item and when the user who created the listing would close the auction for that listing 
-and person with the highest bid would win the auction.
+Its an auction platform where any user can create an listing for an item , then other users would bid on that item and when the user who created the listing closes the auction for that item listing then the person with the highest bid would win the auction.
 
 ### Requirement and Proceure to Runserver
 
