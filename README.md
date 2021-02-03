@@ -2,7 +2,7 @@
 
 Its an auction platform where any user can create an listing for an item , then other users would bid on that item and when the user who created the listing closes the auction for that item listing then the person with the highest bid would win the auction.
 
-### Requirement and Proceure to Runserver
+### Requirement and Procedure to Runserver
 
 -> If have not installed Django already then intall it by using command "pip install django" in terminal.
 
